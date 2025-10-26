@@ -19,7 +19,9 @@ El objetivo de este proyecto es **simular visualmente el sistema solar** usando 
 
 El proyecto combina conceptos de **gráficos 3D en tiempo real**, texturización de objetos, iluminación y manipulación de cámara para ofrecer una experiencia interactiva del sistema solar.
 
-<img src="img/screenshor.png" width="400" align="center"/>
+<p align="center">
+  <img src="img/screenshor.png" width="800"/>
+</p>
 
 ---
 
