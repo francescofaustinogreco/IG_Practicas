@@ -8,8 +8,8 @@ let controls;
 let planets = [];
 let gui;
 let sun;
-let shipVelocity = new THREE.Vector3(); // velocità della nave
-let keys = {}; // tasti premuti
+let shipVelocity = new THREE.Vector3();
+let keys = {}; 
 let options = { viewMode: 'Orbital view' };
 
 init();
@@ -26,20 +26,17 @@ function init() {
     camera.position.set(0, 50, 100);
     currentCamera = camera;
 
-    // Camera nave (free flight)
+    // Camera nave 
     shipCamera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
     shipCamera.position.set(0, 5, 30);
 
-    // Controls orbitali
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
 
-    // Luci
     scene.add(new THREE.AmbientLight(0x444444));
     const sunLight = new THREE.PointLight(0xffffff, 2);
     scene.add(sunLight);
 
-    // Sole
     const sunTex = new THREE.TextureLoader().load('./img/sun.jpg');
     sun = new THREE.Mesh(
         new THREE.SphereGeometry(10, 32, 32),
@@ -57,7 +54,6 @@ function init() {
     createPlanetWithOrbit('Uranus', './img/uranus.jpg', 2.5, 60, 0.003);
     createPlanetWithOrbit('Neptune', './img/neptune.jpg', 2.5, 70, 0.003);
 
-    // Sfondo (immagine)
     const bgTexture = new THREE.TextureLoader().load('./img/stars.jpg');
     const bgMesh = new THREE.Mesh(
         new THREE.SphereGeometry(500, 64, 64),
@@ -89,7 +85,6 @@ function createPlanetWithOrbit(name, texturePath, size, radius, speed) {
     scene.add(planet);
     planets.push(planet);
 
-    // Orbita
     const points = [];
     const segments = 64;
     for (let i = 0; i <= segments; i++) {
@@ -123,18 +118,18 @@ function animatePlanets() {
     });
 }
 
-// Movimento nave libera
+
 function updateShipControls() {
     const speed = 0.5;
     const rotationSpeed = 0.02;
 
-    // Rotazioni
+
     if (keys['arrowleft']) shipCamera.rotation.y += rotationSpeed;
     if (keys['arrowright']) shipCamera.rotation.y -= rotationSpeed;
     if (keys['arrowup']) shipCamera.rotation.x += rotationSpeed;
     if (keys['arrowdown']) shipCamera.rotation.x -= rotationSpeed;
 
-    // Direzioni
+
     const direction = new THREE.Vector3();
     shipCamera.getWorldDirection(direction);
 
@@ -146,7 +141,7 @@ function updateShipControls() {
     if (keys['a']) shipCamera.position.addScaledVector(right, speed);
     if (keys['d']) shipCamera.position.addScaledVector(right, -speed);
 
-    // Su e giù
+
     if (keys['q']) shipCamera.position.y += speed;
     if (keys['e']) shipCamera.position.y -= speed;
 }
