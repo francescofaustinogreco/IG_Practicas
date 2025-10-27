@@ -196,5 +196,4 @@ function animate() {
 - Three.js Documentation
 - OrbitControls
 - [Solar Textures](https://www.solarsystemscope.com/textures/)
-- lil-gui – Librería de interfaz gráfica para control de parámetros
 - ChatGPT para ayuda lingüística
