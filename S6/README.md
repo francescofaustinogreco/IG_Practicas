@@ -150,6 +150,7 @@ En el HTML se ha añadido una pequeña leyenda de controles fija en pantalla:
 <p align="center">
   <img src="img/nave.png" width="800"/>
 </p>
+
 ---
 
 ## Animación
