@@ -8,6 +8,7 @@ Autore: Francesco Faustino Greco
 - [Introducción](#introducción)
 - [Estructura del Proyecto](#estructura-del-proyecto)
 - [Planetas y Órbitas](#planetas-y-órbitas)
+- [Vista Nave](#vista-nave)
 - [Animación](#animación)
 - [Fuentes y Documentación](#fuentes-y-documentación)
 
@@ -20,7 +21,7 @@ El objetivo de este proyecto es **simular visualmente el sistema solar** usando 
 El proyecto combina conceptos de **gráficos 3D en tiempo real**, texturización de objetos, iluminación y manipulación de cámara para ofrecer una experiencia interactiva del sistema solar.
 
 <p align="center">
-  <img src="img/screenshor.png" width="800"/>
+  <img src="img/orbital.png" width="800"/>
 </p>
 
 ---
@@ -89,6 +90,66 @@ function createPlanetWithOrbit(name, texturePath, size, radius, speed, extraText
     }
 }
 ```
+---
+## Vista Nave
+Además de la vista orbital con OrbitControls, se ha implementado un modo Nave que permite moverse libremente por el espacio, como si el usuario pilotara una nave espacial.
+
+### Caracteristicas
+- Movimiento libre con las teclas
+- Transición suave entre modos cámara / nave
+La cámara no está anclada a ningún planeta, lo que permite explorar el sistema solar desde cualquier punto de vista.
+
+```javascript
+const moveSpeed = 0.5;
+const rotationSpeed = 0.02;
+const keys = {};
+
+window.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
+window.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
+
+function updateSpaceshipControls() {
+    if (keys['w']) camera.position.add(camera.getWorldDirection(new THREE.Vector3()).multiplyScalar(moveSpeed));
+    if (keys['s']) camera.position.add(camera.getWorldDirection(new THREE.Vector3()).multiplyScalar(-moveSpeed));
+    if (keys['a']) camera.position.x -= moveSpeed;
+    if (keys['d']) camera.position.x += moveSpeed;
+    if (keys['q']) camera.position.y += moveSpeed;
+    if (keys['e']) camera.position.y -= moveSpeed;
+
+    if (keys['arrowleft']) camera.rotation.y += rotationSpeed;
+    if (keys['arrowright']) camera.rotation.y -= rotationSpeed;
+    if (keys['arrowup']) camera.rotation.x += rotationSpeed;
+    if (keys['arrowdown']) camera.rotation.x -= rotationSpeed;
+}
+
+```
+
+Y dentro del ciclo de animación principal:
+
+```javascript
+function animate() {
+    requestAnimationFrame(animate);
+    animatePlanets();
+    updateSpaceshipControls();
+    sun.rotation.y += 0.005;
+    renderer.render(scene, camera);
+}
+```
+
+### Interfaz Visual (HTML)
+En el HTML se ha añadido una pequeña leyenda de controles fija en pantalla:
+```html
+    <div class="controls">
+        <strong>Controles de Nave</strong><br>
+        <strong>W / S</strong> → Avanzar / Retroceder<br>
+        <strong>A / D</strong> → Girar izquierda / derecha<br>
+        <strong>Q / E</strong> → Subir / Bajar<br>
+        <strong>⬆️⬇️⬅️➡️ -> Rotar Cámara<br>
+    </div>
+```
+
+<p align="center">
+  <img src="img/nave.png" width="800"/>
+</p>
 ---
 
 ## Animación
