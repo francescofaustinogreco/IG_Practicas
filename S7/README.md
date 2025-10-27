@@ -18,6 +18,8 @@ Autore: Francesco Faustino Greco
 
 El objetivo de este proyecto es **simular visualmente el sistema solar** usando **Three.js**, mostrando los planetas orbitando alrededor del Sol.  
 
+[CodeSandbox LINK:https://codesandbox.io/p/sandbox/sistema-planetario-c87x8t](https://codesandbox.io/p/sandbox/sistema-planetario-c87x8t)
+
 El proyecto combina conceptos de **gráficos 3D en tiempo real**, texturización de objetos, iluminación y manipulación de cámara para ofrecer una experiencia interactiva del sistema solar.
 
 <p align="center">
