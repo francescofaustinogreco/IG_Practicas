@@ -11,8 +11,6 @@ let sun;
 let shipVelocity = new THREE.Vector3();
 let keys = {};
 let options = { viewMode: 'Orbital view' };
-
-// 🌙 --- variabile per la Luna ---
 let moon, earthPlanet;
 
 init();
@@ -24,20 +22,20 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    // Camera orbitale
+
     camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 50, 100);
     currentCamera = camera;
 
-    // Camera nave
+
     shipCamera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
     shipCamera.position.set(0, 5, 30);
 
-    // Controls orbitali
+
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
 
-    // Luci
+
     scene.add(new THREE.AmbientLight(0x444444));
     const sunLight = new THREE.PointLight(0xffffff, 2);
     scene.add(sunLight);
@@ -60,7 +58,7 @@ function init() {
     createPlanetWithOrbit('Uranus', './img/uranus.jpg', 2.5, 60, 0.003);
     createPlanetWithOrbit('Neptune', './img/neptune.jpg', 2.5, 70, 0.003);
 
-    // 🌙 --- Luna (attorno alla Terra) ---
+
     const moonTex = new THREE.TextureLoader().load('./img/moon.jpg');
     moon = new THREE.Mesh(
         new THREE.SphereGeometry(0.5, 32, 32),
@@ -83,7 +81,7 @@ function init() {
        .name('Vista')
        .onChange(updateCameraView);
 
-    // Eventi
+
     window.addEventListener('resize', onResize);
     window.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
     window.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
@@ -136,7 +134,6 @@ function animatePlanets() {
         p.rotation.y += 0.01;
     });
 
-    // 🌙 --- Animazione Luna ---
     if (moon && earthPlanet) {
         moon.userData.angle += moon.userData.speed;
         const d = moon.userData.distance;
@@ -148,7 +145,7 @@ function animatePlanets() {
     }
 }
 
-// Movimento nave
+
 function updateShipControls() {
     const speed = 0.5;
     const rotationSpeed = 0.02;
